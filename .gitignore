@@ -1,0 +1,19 @@
+# Secrets / lokale Umgebung
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Echte Credential-Exporte niemals committen
+credentials/*.json
+!credentials/*.example.json
+
+# n8n lokale Daten
+.n8n/
+*.sqlite
+*.sqlite-journal
+
+# System
+.DS_Store
+Thumbs.db
