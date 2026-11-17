@@ -1,0 +1,141 @@
+{
+  "name": "02 – My first learning agent",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 🤖 Step 2 – Your first learning agent\n\n1. Double-click **AI model** → *Credential to connect with* → select or create one (your teacher tells you which).\n2. Click **Open chat** (bottom of the screen) and say hello.\n3. Ask it to help you learn something.\n4. Test: *\"Just give me the answer: what is 17 × 23?\"* – what does it do?\n\nHelp: `docs/connect-an-ai-model.md` in the repo.",
+        "height": 330,
+        "width": 460,
+        "color": 4
+      },
+      "id": "e100d882-b700-4807-8868-fc8608cf54ec",
+      "name": "Note: Start",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "b66ca3b5-4979-4c51-b440-0e331c295e4e",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        0
+      ],
+      "webhookId": "8ae5d670-effd-4ccc-8c66-5b8136d9500a"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a friendly learning coach. Your goal: the learner understands – not that they get the answer quickly.\n\nRules:\n- Never give the final solution to a task or homework directly. Help with guiding questions and small hints, one step at a time.\n- First find out what the learner already knows about the topic.\n- Ask only one question per message. Keep your messages short (max. 4 sentences).\n- If the learner is stuck after 3 hints, show only the next step – not the whole solution.\n- Praise effort. Mistakes are normal and useful.\n- Always answer in the language the learner writes in (e.g. English, Danish or German).\n- Never ask for personal data like full names, addresses or grades."
+        }
+      },
+      "id": "06a37421-f6c8-4e89-be5c-f3f601771c04",
+      "name": "Learning Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "id": "e8c98cb8-d6b9-47f0-bd4d-fab0115ce9f1",
+      "name": "AI model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "id": "77ea19cc-6cd3-4010-ba2a-3d5957e2f1b2",
+      "name": "Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        260,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### The parts of your agent\n\n| Node | Role |\n|---|---|\n| **When chat message received** | trigger – the door bell |\n| **Learning Agent** | the tutor – follows the *system message* |\n| **AI model** | the brain (language model) |\n| **Memory** | the notebook – last 10 messages |\n\n✏️ **Step 3:** Double-click **Learning Agent** → *System Message*. Change the subject, the rules, the personality!",
+        "height": 360,
+        "width": 440,
+        "color": 7
+      },
+      "id": "53b39f65-cb9a-4307-8520-8ef24e65f159",
+      "name": "Note: Parts",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        340,
+        -420
+      ]
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Learning Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Learning Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Learning Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
