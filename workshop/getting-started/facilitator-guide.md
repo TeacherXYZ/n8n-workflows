@@ -1,3 +1,5 @@
+**English** | [Deutsch](facilitator-guide.de.md)
+
 # Facilitator notes – "Getting started"
 
 Building blocks and practical notes. Timing, grouping and order are up to you – adapt them to the situation.

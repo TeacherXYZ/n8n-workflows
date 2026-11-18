@@ -1,3 +1,5 @@
+**English** | [Deutsch](n8n-basics.de.md)
+
 # n8n basics
 
 **n8n** (say "n-eight-n", short for "nodemation") is a tool to build automations and AI agents by connecting blocks on a canvas – no or very little programming needed.

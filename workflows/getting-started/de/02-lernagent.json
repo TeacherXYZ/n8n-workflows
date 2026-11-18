@@ -1,0 +1,141 @@
+{
+  "name": "02 – Mein erster Lernagent",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 🤖 Schritt 2 – Dein erster Lernagent\n\n1. Doppelklick auf **KI-Modell** → *Credential to connect with* → eins auswählen oder anlegen (welches, sagt dir deine Lehrkraft).\n2. Klick auf **Open chat** (unten auf dem Bildschirm) und sag Hallo.\n3. Bitte ihn, dir beim Lernen zu helfen.\n4. Test: *„Sag mir einfach die Antwort: Was ist 17 × 23?“* – was macht er?\n\nHilfe: `docs/connect-an-ai-model.de.md` im Repo.",
+        "height": 330,
+        "width": 460,
+        "color": 4
+      },
+      "id": "dfdda614-5432-477e-b0a2-2aa4ff3120f7",
+      "name": "Notiz: Start",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "af3c6576-a781-42ca-9aff-0ee6425f9130",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        0
+      ],
+      "webhookId": "1d3af21f-b7b3-4ea7-b981-5e92f7ec481e"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Du bist ein freundlicher Lerncoach. Dein Ziel: Die lernende Person versteht etwas – nicht, dass sie schnell eine Antwort bekommt.\n\nRegeln:\n- Gib nie direkt die fertige Lösung einer Aufgabe oder Hausaufgabe. Hilf mit Leitfragen und kleinen Tipps, Schritt für Schritt.\n- Finde zuerst heraus, was die Person schon über das Thema weiß.\n- Stell pro Nachricht nur eine Frage. Halte deine Nachrichten kurz (höchstens 4 Sätze).\n- Wenn die Person nach 3 Tipps noch feststeckt, zeig nur den nächsten Schritt – nicht die ganze Lösung.\n- Lobe Anstrengung. Fehler sind normal und nützlich.\n- Antworte immer in der Sprache, in der die Person schreibt (z. B. Deutsch, Dänisch oder Englisch).\n- Frag nie nach persönlichen Daten wie vollständigen Namen, Adressen oder Noten."
+        }
+      },
+      "id": "6addd9e5-e61c-45da-9fb3-6600892b1fa0",
+      "name": "Lernagent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "id": "7e621f63-819d-47d0-8453-8618ac2c3984",
+      "name": "KI-Modell",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "id": "3edbf2f8-e87e-4402-9644-a3b767856884",
+      "name": "Gedächtnis",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        260,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Die Teile deines Agenten\n\n| Node | Rolle |\n|---|---|\n| **When chat message received** | Trigger – die Türklingel |\n| **Lernagent** | der Tutor – folgt der *System Message* |\n| **KI-Modell** | das Gehirn (Sprachmodell) |\n| **Gedächtnis** | das Notizbuch – die letzten 10 Nachrichten |\n\n✏️ **Schritt 3:** Doppelklick auf **Lernagent** → *System Message*. Ändere das Fach, die Regeln, die Persönlichkeit!",
+        "height": 360,
+        "width": 440,
+        "color": 7
+      },
+      "id": "426a7401-73ce-48bb-9b7d-36fa94fb57eb",
+      "name": "Notiz: Teile",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        340,
+        -420
+      ]
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Lernagent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KI-Modell": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Lernagent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gedächtnis": {
+      "ai_memory": [
+        [
+          {
+            "node": "Lernagent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

@@ -1,3 +1,5 @@
+**English** | [Deutsch](README.de.md)
+
 # Getting started: your first steps with n8n
 
 **Goal:** You build and talk to your own **learning agent**: an AI tutor that helps you learn instead of just giving answers.

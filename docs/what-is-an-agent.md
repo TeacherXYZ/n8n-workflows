@@ -1,3 +1,5 @@
+**English** | [Deutsch](what-is-an-agent.de.md)
+
 # What is an AI agent?
 
 ## Three levels

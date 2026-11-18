@@ -1,4 +1,6 @@
+**English** | [Deutsch](README.de.md)
+
 # Credentials
 
-Hier liegen **keine echten Zugangsdaten**, nur Hinweise, welche Credentials ein Workflow braucht.
-Optional können Vorlagen als `*.example.json` abgelegt werden (ohne Werte).
+This folder contains **no real credentials** – only notes on which credentials a workflow needs.
+Templates without values can be stored as `*.example.json`.

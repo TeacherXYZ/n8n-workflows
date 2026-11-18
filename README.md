@@ -1,3 +1,5 @@
+**English** | [Deutsch](README.de.md)
+
 # n8n Workflows – Build, don't just listen
 
 Ready-to-import n8n workflows, short explanations and slides for learners.
@@ -10,9 +12,9 @@ No prior knowledge needed.
 | Folder | What's inside |
 |---|---|
 | [`workshop/getting-started/`](workshop/getting-started/README.md) | Hands-on: from "What is n8n?" to your own learning agent |
-| [`workflows/`](workflows/) | Workflow files (`.json`) you can import into n8n |
+| [`workflows/`](workflows/) | Workflow files (`.json`) you can import into n8n – [German versions](workflows/getting-started/de/) |
 | [`docs/`](docs/) | Short background reads: [What is an AI agent?](docs/what-is-an-agent.md) · [n8n basics](docs/n8n-basics.md) · [Connecting an AI model](docs/connect-an-ai-model.md) |
-| [`slides/`](slides/) | Presentation for the session ([PDF](slides/getting-started.pdf)) |
+| [`slides/`](slides/) | Presentation ([PDF English](slides/getting-started.pdf) · [PDF Deutsch](slides/getting-started.de.pdf)) |
 | [`credentials/`](credentials/) | Notes on which accounts/keys a workflow needs – **never real secrets** |
 
 ## How to load a workflow into n8n

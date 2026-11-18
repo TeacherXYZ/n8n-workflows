@@ -1,0 +1,266 @@
+{
+  "name": "01 – Hallo n8n (Wetter in unseren Städten)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 👋 Schritt 1 – Hallo n8n\n\n1. Klick auf **Execute workflow** / **Execute** (unten auf dem Bildschirm).\n2. Öffne jeden Node mit Doppelklick, von links nach rechts. Schau dir **INPUT** (links) und **OUTPUT** (rechts) an.\n3. Ändere die Städte in **Unsere Städte** und führ den Workflow nochmal aus.\n\n**Frage:** Welche Stadt ist gerade wärmer?",
+        "height": 230,
+        "width": 420,
+        "color": 4
+      },
+      "id": "b3251fbc-92d4-414b-b48e-b7808c87896a",
+      "name": "Notiz: Start",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        -360
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "f732dbd6-69fc-4e88-b060-e58c6f3a46a3",
+      "name": "When clicking 'Execute workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ✏️ DU BIST DRAN: Ändere die Städtenamen (Anführungszeichen \"\" und Kommas behalten).\n// Du kannst so viele Städte eintragen, wie du willst.\nconst cities = [\"Kassel\", \"Kopenhagen\"];\n\n// Jede Stadt wird zu einem \"Item\". Die nächsten Nodes laufen einmal pro Item.\nreturn cities.map(city => ({ json: { city } }));"
+      },
+      "id": "dc3ff8c6-4ebe-499e-b669-2f79220c01f5",
+      "name": "Unsere Städte",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        140,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://geocoding-api.open-meteo.com/v1/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ $json.city }}"
+            },
+            {
+              "name": "count",
+              "value": "1"
+            },
+            {
+              "name": "language",
+              "value": "de"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "77ca78ee-fd8f-4bf4-bfa5-fc0a249467b9",
+      "name": "Stadt auf der Karte finden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        360,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "latitude",
+              "value": "={{ $json.results[0].latitude }}"
+            },
+            {
+              "name": "longitude",
+              "value": "={{ $json.results[0].longitude }}"
+            },
+            {
+              "name": "current",
+              "value": "temperature_2m,wind_speed_10m"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dd7d0e86-b08d-4de2-aa48-9f223da4d8ce",
+      "name": "Wetter abrufen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        580,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "75432dfa-91de-4afb-afbf-f7e97d5aba47",
+              "name": "stadt",
+              "type": "string",
+              "value": "={{ $('Stadt auf der Karte finden').item.json.results[0].name }}"
+            },
+            {
+              "id": "ff28387e-efe3-4292-9a35-23780bfa32b1",
+              "name": "land",
+              "type": "string",
+              "value": "={{ $('Stadt auf der Karte finden').item.json.results[0].country }}"
+            },
+            {
+              "id": "05c3dfbf-71f5-46eb-a94e-50087b60bfa8",
+              "name": "temperatur_celsius",
+              "type": "number",
+              "value": "={{ $json.current.temperature_2m }}"
+            },
+            {
+              "id": "3b7894cd-a97b-493f-a186-f62a58052a65",
+              "name": "satz",
+              "type": "string",
+              "value": "=Gerade sind es {{ $json.current.temperature_2m }} °C in {{ $('Stadt auf der Karte finden').item.json.results[0].name }} (Wind: {{ $json.current.wind_speed_10m }} km/h)."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8436aef9-f4df-45c2-aff1-2612bb69f203",
+      "name": "Schöne Antwort",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Trigger** – entscheidet, *wann* der Workflow startet. Hier: wenn du klickst.",
+        "height": 120,
+        "width": 220,
+        "color": 7
+      },
+      "id": "76166662-5822-4cd9-ade0-66d32130f72a",
+      "name": "Notiz: Trigger",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Daten** – eine Liste von Städten. ✏️ Ändere sie!",
+        "height": 120,
+        "width": 200,
+        "color": 3
+      },
+      "id": "54ca1eb3-8313-4ca5-b3e8-d064c822691b",
+      "name": "Notiz: Daten",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        100,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Das Internet fragen** – zwei kostenlose Webdienste (APIs) von open-meteo.com: erst die Stadt finden, dann ihr Wetter abrufen.",
+        "height": 120,
+        "width": 420,
+        "color": 7
+      },
+      "id": "909dbe5d-5f62-4f9c-a5d7-8b5067a08064",
+      "name": "Notiz: HTTP",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        340,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Ergebnis vorbereiten** – die Felder auswählen, die wir brauchen, und einen Satz schreiben. `{{ }}` = einen Wert aus den Daten nehmen.",
+        "height": 140,
+        "width": 240,
+        "color": 7
+      },
+      "id": "baf5f483-498f-47b2-bbc6-a07c184f0f2b",
+      "name": "Notiz: Ergebnis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        780,
+        220
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Unsere Städte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unsere Städte": {
+      "main": [
+        [
+          {
+            "node": "Stadt auf der Karte finden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Stadt auf der Karte finden": {
+      "main": [
+        [
+          {
+            "node": "Wetter abrufen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wetter abrufen": {
+      "main": [
+        [
+          {
+            "node": "Schöne Antwort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
