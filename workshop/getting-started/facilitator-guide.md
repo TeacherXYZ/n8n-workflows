@@ -1,36 +1,33 @@
-# Facilitator guide – "Getting started" (60 min)
+# Facilitator notes – "Getting started"
 
-Principle: **max. 10 minutes of talking, 50 minutes of doing.** Everyone has a running agent before the hour is over.
+Building blocks and practical notes. Timing, grouping and order are up to you – adapt them to the situation.
 
-## Before the session (15 min)
+## Before the session
 
-- [ ] Write the link on the board: **github.com/TeacherXYZ/n8n-workflows**
+- [ ] Share the link: **github.com/TeacherXYZ/n8n-workflows**
 - [ ] Repo must be **public** (otherwise learners can't open it without a GitHub login).
-- [ ] Decide how learners get AI access (see [Connecting an AI model](../../docs/connect-an-ai-model.md)):
-  - n8n Cloud trial → free OpenAI credits (test once yourself!), **or**
-  - one class API key with a low spending limit (delete it afterwards).
-- [ ] Test workflow 02 yourself in a learner account: import → credential → chat. (5 min)
-- [ ] Check: do all learners have a working n8n login? Those without one pair up with someone who has.
-- [ ] Mixed pairs: 1 Danish + 1 German learner per laptop. One types, one navigates – switch after each step.
+- [ ] Decide how learners get AI access (see [Connecting an AI model](../../docs/connect-an-ai-model.md)).
+- [ ] Test workflow 02 yourself in a learner account: import → credential → chat.
+- [ ] Check that learners can log in to n8n.
 
-## Run sheet
+## Building blocks
 
-| Min | Facilitator | Learners |
+| Block | Content | Material |
 |---|---|---|
-| 0–3 | "Today we build. In 60 minutes, every pair talks to their own AI tutor." Form pairs. | Open link, open n8n |
-| 3–10 | Slides 1–8: n8n in one picture, what is an agent, what is a *learning* agent. | Listen, 1 question to the neighbour |
-| 10–25 | **Step 1** – Show import + "Execute workflow" once on the projector (2 min), then let go. | Import 01, run, change cities |
-| 25–45 | **Step 2** – Show credential + "Open chat" once (3 min). Walk around, fix credentials. | Import 02, connect model, chat, test the "homework" question |
-| 45–55 | **Step 3** – "Change the system message. Then swap laptops." | Design own tutor, test another pair's tutor |
-| 55–60 | 2–3 pairs show their tutor for 1 min each. Collect on the board: *What makes a learning agent helpful?* | Share |
+| Intro | What is n8n? What is an agent? Why a *learning* agent? | [slides](../../slides/getting-started.pdf), [docs](../../docs/) |
+| Step 1 | First workflow without AI: trigger, nodes, data flow | [`01-hello-n8n.json`](../../workflows/getting-started/01-hello-n8n.json) |
+| Step 2 | First learning agent: connect a model, chat, test the "homework" question | [`02-learning-agent.json`](../../workflows/getting-started/02-learning-agent.json) |
+| Step 3 | Change the system message: subject, rules, personality; let others test it | – |
+| Bonus | Agent with tools (Wikipedia, calculator) | [`03-learning-agent-with-tools.json`](../../workflows/getting-started/03-learning-agent-with-tools.json) |
+| Reflection | *What makes a learning agent actually helpful?* | – |
 
-Fast pairs: Bonus workflow 03 (tools). Slow pairs: skip Step 1 changes, go to Step 2 directly – the agent is the goal.
+Step 1 can be skipped if the focus is on the agent. Steps 2 and 3 work on their own.
 
 ## The bridge to the joint project
 
-The board list from the last 5 minutes ("What makes a learning agent helpful?") is the first requirements list for the Danish–German learning agent. Take a photo. Possible follow-ups:
+The answers to *"What makes a learning agent actually helpful?"* can serve as a first requirements list for a joint learning agent. Possible follow-up questions:
 
-- Which subject / which learners should the joint agent serve?
+- Which subject / which learners should the agent serve?
 - Which rules should it follow (language, hints vs. answers, level)?
 - Which tools would it need (course material, quiz generator, vocabulary list…)?
 

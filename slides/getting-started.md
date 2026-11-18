@@ -18,7 +18,7 @@ style: |
 
 # Build, don't just listen
 
-## Your first hour with n8n
+## Your first steps with n8n
 
 **github.com/TeacherXYZ/n8n-workflows**
 
@@ -26,11 +26,7 @@ style: |
 
 # Today's goal
 
-<p class="big">In 60 minutes, every pair talks to<br>their own AI learning agent.</p>
-
-- Work in pairs: one Danish + one German learner per laptop
-- One types, one navigates – switch after each step
-- Stuck? Ask your neighbours first, then the teacher
+<p class="big">Build and talk to<br>your own AI learning agent.</p>
 
 ---
 
@@ -92,14 +88,14 @@ Whether it does this depends on **its instructions**. You write them.
 
 ---
 
-# Your hour
+# The steps
 
-| Min | |
+| | |
 |---|---|
-| 10–25 | **Step 1** – first workflow: weather |
-| 25–45 | **Step 2** – first learning agent: chat with it |
-| 45–55 | **Step 3** – make it yours, swap laptops, test |
-| 55–60 | Show & tell |
+| **Step 1** | first workflow: weather |
+| **Step 2** | first learning agent: chat with it |
+| **Step 3** | make it yours, let others test it |
+| **Bonus** | give your agent tools |
 
 Everything is in the repo: **workshop/getting-started**
 

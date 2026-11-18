@@ -3,13 +3,13 @@
 Ready-to-import n8n workflows, short explanations and slides for learners.
 No prior knowledge needed.
 
-> **Start here:** [Getting started – your first hour with n8n](workshop/getting-started/README.md)
+> **Start here:** [Getting started – your first steps with n8n](workshop/getting-started/README.md)
 
 ## What you find here
 
 | Folder | What's inside |
 |---|---|
-| [`workshop/getting-started/`](workshop/getting-started/README.md) | Hands-on session (60 min): from "What is n8n?" to your own learning agent |
+| [`workshop/getting-started/`](workshop/getting-started/README.md) | Hands-on: from "What is n8n?" to your own learning agent |
 | [`workflows/`](workflows/) | Workflow files (`.json`) you can import into n8n |
 | [`docs/`](docs/) | Short background reads: [What is an AI agent?](docs/what-is-an-agent.md) · [n8n basics](docs/n8n-basics.md) · [Connecting an AI model](docs/connect-an-ai-model.md) |
 | [`slides/`](slides/) | Presentation for the session ([PDF](slides/getting-started.pdf)) |
